@@ -1,0 +1,13 @@
+﻿using MediatR;
+using MultiShop.Order.Domain.Entities;
+
+namespace MultiShop.Order.Application.Features.Mediator.Commands.OrderingCommands
+{
+    public class CreateOrderingCommands : IRequest
+    {
+        public int UserId { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime OrderDate { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+    }
+}
