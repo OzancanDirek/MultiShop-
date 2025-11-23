@@ -7,7 +7,7 @@ namespace MultiShop.Order.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderDetailsController : ControllerBase
+    public class OrderDetailsController : ControllerBase //handlerdan al - handlerda commandden verileri alsın
     {
         private readonly GetOrderDetailQueryHandler _getOrderDetailQueryHandler;
         private readonly GetOrderDetailByIdQueryHandler _getOrderDetailByIdQueryHandler;
@@ -43,7 +43,7 @@ namespace MultiShop.Order.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrderDetail(CreateOrderDetailCommand command)
         {
-            await _createOrderDetailCommandHandler.Handle(command);
+            await _createOrderDetailCommandHandler.Handle(command); 
             return Ok("Siparis bilgisi basariyla eklendi");
         }
 
