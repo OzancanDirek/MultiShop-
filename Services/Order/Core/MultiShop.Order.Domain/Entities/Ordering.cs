@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace MultiShop.Order.Domain.Entities
 {
@@ -12,6 +8,8 @@ namespace MultiShop.Order.Domain.Entities
         public int UserId { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
+
+        [JsonIgnore]
         public List<OrderDetail> OrderDetails { get; set; }
     }
 }
