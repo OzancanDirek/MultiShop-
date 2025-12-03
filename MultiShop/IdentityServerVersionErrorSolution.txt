@@ -1,0 +1,2 @@
+https://learn.microsoft.com/en-us/answers/questions/902363/cannot-load-file-or-assembly-system-runtime
+https://learn.microsoft.com/en-us/answers/questions/2139175/fix-the-error-could-not-load-file-or-assembly-syst
