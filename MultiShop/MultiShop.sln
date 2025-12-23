@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.WebUI", "..\Frontends\MultiShop.WebUI\MultiShop.WebUI.csproj", "{AEC6AD34-C07F-4BFB-B728-404E7E7E201F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.DtoLayer", "..\Frontends\MultiShop.DtoLayer\MultiShop.DtoLayer.csproj", "{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -237,6 +239,18 @@ Global
 		{AEC6AD34-C07F-4BFB-B728-404E7E7E201F}.Release|x64.Build.0 = Release|Any CPU
 		{AEC6AD34-C07F-4BFB-B728-404E7E7E201F}.Release|x86.ActiveCfg = Release|Any CPU
 		{AEC6AD34-C07F-4BFB-B728-404E7E7E201F}.Release|x86.Build.0 = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|x64.Build.0 = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Debug|x86.Build.0 = Debug|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|x64.ActiveCfg = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|x64.Build.0 = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|x86.ActiveCfg = Release|Any CPU
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -265,6 +279,7 @@ Global
 		{3D4C01DA-606F-40C9-B53E-8D0435B99F1E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D1D7684D-35AA-41B2-A4BF-C6BB3A466B16} = {3D4C01DA-606F-40C9-B53E-8D0435B99F1E}
 		{AEC6AD34-C07F-4BFB-B728-404E7E7E201F} = {FA52313D-6D85-490F-A7C0-7BB9FE8D35E0}
+		{8BB02020-D1AA-4F1E-A400-50B2D9E2318C} = {FA52313D-6D85-490F-A7C0-7BB9FE8D35E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E610E7B5-C093-4A97-A8C6-02DAA0CAD9DC}
