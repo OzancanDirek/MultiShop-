@@ -1,0 +1,349 @@
+=== UPDATE PRODUCT POST ===
+Zaman: 20:08:27.457
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '300'
+DTO Price Type: Decimal
+DTO Price ToString: '300'
+DTO Price Length: 3
+DTO Bytes: 33-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '300'
+Form['ProductPrice'] Length: 3
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 300.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:08:44.362
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '300'
+DTO Price Type: Decimal
+DTO Price ToString: '300'
+DTO Price Length: 3
+DTO Bytes: 33-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '300'
+Form['ProductPrice'] Length: 3
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 300.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:10:08.055
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '300'
+DTO Price Type: Decimal
+DTO Price ToString: '300'
+DTO Price Length: 3
+DTO Bytes: 33-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '300'
+Form['ProductPrice'] Length: 3
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 300.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:10:12.419
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '3000'
+DTO Price Type: Decimal
+DTO Price ToString: '3000'
+DTO Price Length: 4
+DTO Bytes: 33-30-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '3000'
+Form['ProductPrice'] Length: 4
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 3000.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:10:32.859
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '30000'
+DTO Price Type: Decimal
+DTO Price ToString: '30000'
+DTO Price Length: 5
+DTO Bytes: 33-30-30-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '30000'
+Form['ProductPrice'] Length: 5
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30000.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:10:35.417
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '300000'
+DTO Price Type: Decimal
+DTO Price ToString: '300000'
+DTO Price Length: 6
+DTO Bytes: 33-30-30-30-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '300000'
+Form['ProductPrice'] Length: 6
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 300000.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:15:27.361
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '30'
+DTO Price Type: Decimal
+DTO Price ToString: '30'
+DTO Price Length: 2
+DTO Bytes: 33-30
+ModelState IsValid: True
+Form['ProductPrice']: '30'
+Form['ProductPrice'] Length: 2
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:15:30.916
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '3'
+DTO Price Type: Decimal
+DTO Price ToString: '3'
+DTO Price Length: 1
+DTO Bytes: 33
+ModelState IsValid: True
+Form['ProductPrice']: '3'
+Form['ProductPrice'] Length: 1
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 3.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:15:33.204
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '30'
+DTO Price Type: Decimal
+DTO Price ToString: '30'
+DTO Price Length: 2
+DTO Bytes: 33-30
+ModelState IsValid: True
+Form['ProductPrice']: '30'
+Form['ProductPrice'] Length: 2
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:15:35.777
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '300'
+DTO Price Type: Decimal
+DTO Price ToString: '300'
+DTO Price Length: 3
+DTO Bytes: 33-30-30
+ModelState IsValid: True
+Form['ProductPrice']: '300'
+Form['ProductPrice'] Length: 3
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 300.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:15:38.826
+URL ID: 694d4db3a62e04a123fb4862
+DTO Null mu: False
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: '3'
+DTO Price Type: Decimal
+DTO Price ToString: '3'
+DTO Price Length: 1
+DTO Bytes: 33
+ModelState IsValid: True
+Form['ProductPrice']: '3'
+Form['ProductPrice'] Length: 1
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 3.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:17:01.186
+URL ID: 694d4db3a62e04a123fb4862
+Form['ProductPrice']: '30'
+Parsed Price (InvariantCulture): 30
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: 30
+ModelState IsValid: True
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:17:29.785
+URL ID: 694d4db3a62e04a123fb4862
+Form['ProductPrice']: '30'
+Parsed Price (InvariantCulture): 30
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: 30
+ModelState IsValid: True
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI
+=== UPDATE PRODUCT POST ===
+Zaman: 20:27:19.908
+URL ID: 694d4db3a62e04a123fb4862
+Form['ProductPrice']: '30'
+Parsed Price (InvariantCulture): 30
+DTO ProductId: 694d4db3a62e04a123fb4862
+DTO ProductName: Deterjan
+DTO ProductPrice: 30
+ModelState IsValid: True
+JSON Gönderilecek:
+{
+  "ProductId": "694d4db3a62e04a123fb4862",
+  "ProductName": "Deterjan",
+  "ProductPrice": 30.0,
+  "ProductImageUrl": "string",
+  "ProductDescription": "string",
+  "CategoryId": "694b03c1cd29097daa43d0ca"
+}
+
+
+BAŞARILI

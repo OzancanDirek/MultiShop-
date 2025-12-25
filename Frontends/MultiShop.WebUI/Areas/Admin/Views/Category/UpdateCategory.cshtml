@@ -13,8 +13,7 @@
                     <h4>Kategori Güncelleme</h4>
 
                     <form method="post">
-                        <label> Kategori Id</label>
-                        <input type="text" readonly class="form-control" asp-for="CategoryId" />
+                        <input type="hidden"  asp-for="CategoryId" />
                         <br />
                         <label> Kategori Adı</label>
                         <input type="text" class="form-control" asp-for="CategoryName" />
