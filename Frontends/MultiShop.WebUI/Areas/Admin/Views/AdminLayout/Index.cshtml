@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -13,10 +12,9 @@
 
         <!-- Main Header -->
         @await Component.InvokeAsync("_AdminLayoutHeaderComponentPartial");
-        
+
 
         <!-- Left side column. contains the logo and sidebar -->
-        
         @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial");
 
         <!-- Content Wrapper. Contains page content -->
@@ -40,6 +38,9 @@
     <!-- jQuery -->
     <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/jquery.min.js"></script>
     <script src="~/MainDownload-OvioAdmin-html5-template/html/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/ovio.js"></script>
+    <!-- <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/ovio.js"></script> -->
+    <!-- BU SATIRI EKLEYİN -->
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
