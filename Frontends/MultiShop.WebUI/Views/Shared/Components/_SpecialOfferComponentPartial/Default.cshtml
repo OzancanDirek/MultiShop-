@@ -1,18 +1,16 @@
-﻿<div class="col-lg-4">
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://img.freepik.com/premium-vector/3d-tag-price-icon-with-notice-discount-coupon-cash-future-use-online-shopping-sales-coupon-offer-shopping-special-offer-promotion-3d-discount-announce-icon-vector-render-illustration_412828-2030.jpg?semt=ais_hybrid&w=740&q=80" alt="">
-        <div class="offer-text">
-            <h6 class="text-white text-uppercase">İndirim 20%</h6>
-            <h3 class="text-white mb-3">Özel Teklifler</h3>
-            <a href="" class="btn btn-primary">Alışverişe Başlayın</a>
+﻿@model List<ResultSpecialOfferDto>
+<div class="col-lg-4">
+
+    @foreach (var item in Model)
+    {
+        <div class="product-offer mb-30" style="height: 200px;">
+            <img class="img-fluid" src="@item.ImageUrl" alt="">
+            <div class="offer-text">
+                <h6 class="text-white text-uppercase">@item.Title</h6>
+                <h3 class="text-white mb-3">@item.SubTitle</h3>
+                <a href="" class="btn btn-primary">Alışverişe Başlayın</a>
+            </div>
         </div>
-    </div>
-    <div class="product-offer mb-30" style="height: 200px;">
-        <img class="img-fluid" src="https://www.instyle.com/thmb/AGfC40I3abb5eJ5Dn6GgrcU9Ums=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ins-prime-day-primary-fashion-e74e4a4547594b7fbfcc5837541fdaad.jpg" alt="">
-        <div class="offer-text">
-            <h6 class="text-white text-uppercase">İndirim 30%</h6>
-            <h3 class="text-white mb-3">Günün Fırsatı</h3>
-            <a href="" class="btn btn-primary">Hemen Yararlanın</a>
-        </div>
-    </div>
+
+    }
 </div>
