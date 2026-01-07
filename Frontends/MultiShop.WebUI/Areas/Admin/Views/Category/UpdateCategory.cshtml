@@ -13,12 +13,17 @@
                     <h4>Kategori Güncelleme</h4>
 
                     <form method="post">
-                        <input type="hidden"  asp-for="CategoryId" />
+                        <input type="hidden" asp-for="CategoryId" />
                         <br />
                         <label> Kategori Adı</label>
                         <input type="text" class="form-control" asp-for="CategoryName" />
                         <br />
-                        <button type="submit" class="btn btn-primary">Kategoriyi Güncelle</button>
+                        <label>Görsel URL</label>
+                        <input type="text" class="form-control" asp-for="ImageUrl" />
+
+                        <button type="submit" class="btn btn-warning">
+                            Kategoriyi Güncelle
+                        </button>
                     </form>
                 </div>
             </div>
