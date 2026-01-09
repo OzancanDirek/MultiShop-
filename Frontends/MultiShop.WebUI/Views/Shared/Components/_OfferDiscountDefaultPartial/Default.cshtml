@@ -1,24 +1,20 @@
-﻿<div class="container-fluid pt-5 pb-3">
+﻿@model List<ResultOfferDiscountDto>
+<div class="container-fluid pt-5 pb-3">
     <div class="row px-xl-5">
-        <div class="col-md-6">
-            <div class="product-offer mb-30" style="height: 300px;">
-                <img class="img-fluid" src="https://image-ikea.mncdn.com/Ideas/yazlik-ev-dekorasyonu/yazlik-ev-dekorasyonu-10.jpg" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">%15 İndirim Fırsatı</h6>
-                    <h3 class="text-white mb-3">Ev Dekorasyonu</h3>
-                    <a href="" class="btn btn-primary">Alışverişe Başla</a>
+        @foreach(var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="product-offer mb-30" style="height: 300px;">
+                    <img class="img-fluid" src="@item.ImageUrl" alt="">
+                    <div class="offer-text">
+                        <h6 class="text-white text-uppercase">@item.Title</h6>
+                        <h3 class="text-white mb-3">@item.SubTitle</h3>
+                        <a href="" class="btn btn-primary">@item.ButtonTitle</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="product-offer mb-30" style="height: 300px;">
-                <img class="img-fluid" src="https://img.pikbest.com/wp/202408/website-online-shopping-in-denmark-an-impressive-3d-render-for-social-media-and-websites_9737255.jpg!w700wp" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">%15 Ek İndirim Fırsatları</h6>
-                    <h3 class="text-white mb-3">Özel İndirimler</h3>
-                    <a href="" class="btn btn-primary">Hemen İncele</a>
-                </div>
-            </div>
-        </div>
+        }
+        @await Component.InvokeAsync("_SpecialOfferComponentPartial")
+
     </div>
 </div>

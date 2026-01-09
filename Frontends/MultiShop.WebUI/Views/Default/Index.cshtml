@@ -1,4 +1,5 @@
-﻿
+﻿@model List<ResultOfferDiscountDto>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/_UILayout.cshtml";
@@ -15,10 +16,15 @@
     </div>
 </div>
 
-
 @await Component.InvokeAsync("_CarouselDefaultComponentPartial")
+
+@await Component.InvokeAsync("_SpecialOfferComponentPartial", new { top = true })
+
 @await Component.InvokeAsync("_FeatureDefaultComponentPartial")
 @await Component.InvokeAsync("_CategoriesDefaultComponentPartial")
 @await Component.InvokeAsync("_FeatureProductDefaultComponentPartial")
-@await Component.InvokeAsync("_OfferDiscountDefaultPartial")
+
+@await Component.InvokeAsync("_SpecialOfferComponentPartial", new { top = false })
+
 @await Component.InvokeAsync("_VendorDefaultComponentPartial")
+
