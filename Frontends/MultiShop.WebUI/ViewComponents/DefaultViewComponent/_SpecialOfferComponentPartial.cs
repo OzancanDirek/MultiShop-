@@ -14,7 +14,7 @@ namespace MultiShop.WebUI.ViewComponents.DefaultViewComponent
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(bool top = false)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("https://localhost:7071/api/SpecialOffer");
@@ -23,7 +23,13 @@ namespace MultiShop.WebUI.ViewComponents.DefaultViewComponent
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultSpecialOfferDto>>(jsonData);
-                return View(values);
+
+                if (top)
+                {
+                    return View(values.Skip(2).Take(2).ToList());
+                }
+
+                return View(values.Take(2).ToList());
             }
 
             return View(new List<ResultSpecialOfferDto>());

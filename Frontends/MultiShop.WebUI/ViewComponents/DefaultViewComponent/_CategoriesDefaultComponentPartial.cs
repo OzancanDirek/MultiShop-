@@ -25,7 +25,6 @@ namespace MultiShop.WebUI.ViewComponents.DefaultViewComponent
             }
 
             return View();
-            return View();
         }
     }
 }
