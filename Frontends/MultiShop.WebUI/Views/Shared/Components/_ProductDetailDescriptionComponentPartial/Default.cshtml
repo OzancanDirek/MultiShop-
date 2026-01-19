@@ -1,3 +1,12 @@
 ﻿@model UpdateProductDetailDto
-<h4 class="mb-3">Ürün Detayı</h4>
-<p>@Model.ProductDetailDescription</p>
+
+@if (Model != null)
+{
+    <h4 class="mb-3">Ürün Detayı</h4>
+    <p>@Html.Raw(Model.ProductDetailDescription)</p>
+}
+else
+{
+    <h4 class="mb-3">Ürün Detayı</h4>
+    <p>Ürün açıklaması henüz eklenmemiş veya yüklenemedi.</p>
+}
