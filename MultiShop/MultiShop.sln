@@ -65,6 +65,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Comment", "Comment", "{1508
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiShop.Comment", "..\Services\Comment\MultiShop.Comment\MultiShop.Comment.csproj", "{104A8642-CB8A-4B3E-AC54-31A4BD775E29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requirements", "Requirements", "{8EC52413-469D-44C6-BC80-0E0D2AD742A8}"
+	ProjectSection(SolutionItems) = preProject
+		UserExample.txt = UserExample.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
