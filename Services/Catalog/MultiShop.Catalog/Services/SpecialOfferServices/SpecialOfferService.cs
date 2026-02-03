@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
-using MultiShop.Catalog.Dtos.CategoryDtos;
 using MultiShop.Catalog.Dtos.SpecialOfferDtos;
 using MultiShop.Catalog.Entities;
 using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Services.SpecialOfferServices
 {
-    public class SpecialOfferService: ISpecialOfferService
+    public class SpecialOfferService : ISpecialOfferService
     {
         private readonly IMongoCollection<SpecialOffer> _specialOfferCollection;
         private readonly IMapper _mapper;
