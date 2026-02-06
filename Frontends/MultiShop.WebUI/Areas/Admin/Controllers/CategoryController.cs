@@ -55,7 +55,6 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers
         {
             CategoryViewBagList();
             var values = await _categoryService.GetByIdCategoryAsync(id);
-
             return View(values);
         }
 
