@@ -43,8 +43,16 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
 
         public async Task<GetByIdProductDetailDto> GetByProductIdProductDetailAsync(string id)
         {
-            var values = await _ProductDetailCollection.Find<ProductDetail>(x => x.ProductId == id).FirstOrDefaultAsync();
+            var values = await _ProductDetailCollection
+        .Find(x => x.ProductId == id)
+        .FirstOrDefaultAsync();
+
+            if (values == null)
+                throw new Exception("PRODUCT DETAIL BULUNAMADI");
+
             return _mapper.Map<GetByIdProductDetailDto>(values);
+            //var values = await _ProductDetailCollection.Find<ProductDetail>(x => x.ProductId == id).FirstOrDefaultAsync();
+            //return _mapper.Map<GetByIdProductDetailDto>(values);
         }
 
         public async Task UpdateProductDetailAsync(UpdateProductDetailDto updateProductDetailDto)

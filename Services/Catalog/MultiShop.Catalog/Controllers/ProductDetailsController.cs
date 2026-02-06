@@ -52,7 +52,7 @@ namespace MultiShop.Catalog.Controllers
             return Ok("Ürün detayi basariyla guncellendi");
         }
 
-        [HttpGet("GetProductDetailByProductId")]
+        [HttpGet("GetProductDetailByProductId/{id}")]
         public async Task<IActionResult> GetProductDetailByProductId(string id)
         {
             var values = await _ProductDetailService.GetByProductIdProductDetailAsync(id);
