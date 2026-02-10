@@ -90,7 +90,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7077
+          "Port": 7084
         }
       ]
     },
@@ -114,7 +114,7 @@
         }
       ]
     },
-
+    
     //Payment Service
     {
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
