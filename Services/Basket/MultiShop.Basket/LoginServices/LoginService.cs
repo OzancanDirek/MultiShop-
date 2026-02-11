@@ -3,12 +3,11 @@
     public class LoginService : ILoginService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public LoginService(IHttpContextAccessor httpContextAccessor)
+        public LoginService(IHttpContextAccessor contextAccessor)
         {
-            _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = contextAccessor;
         }
-        //subkeyi alıp token ile ilişkilendirmek icin kullanıyoruz. Böylece sepetle iliskili hale gelecek.
+
         public string GetUserId => _httpContextAccessor.HttpContext.User.FindFirst("sub").Value;
     }
 }

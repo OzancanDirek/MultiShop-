@@ -8,7 +8,7 @@
     <div class="row px-xl-5">
         @await Component.InvokeAsync("_ShoppingCardProductListComponentPartial")
 
-        @await Component.InvokeAsync("_ShoppingCardDiscountCouponComponentPartial")
-
-    </div>
+@*         @await Component.InvokeAsync("_ShoppingCardDiscountCouponComponentPartial")
+ *@
+        @await Html.PartialAsync("/Views/Discount/ComfirmDiscountCoupon.cshtml")
 </div>

@@ -17,8 +17,7 @@ namespace MultiShop.WebUI.Services.Concrete
         private readonly ClientSettings _clientSettings;
         private readonly ServiceApiSettings _serviceApiSettings;
 
-        public IdentityService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, 
-            IOptions<ClientSettings> clientSettings, IOptions<ServiceApiSettings> serviceApiSettings)
+        public IdentityService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IOptions<ClientSettings> clientSettings, IOptions<ServiceApiSettings> serviceApiSettings)
         {
             _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
@@ -28,7 +27,6 @@ namespace MultiShop.WebUI.Services.Concrete
 
         public async Task<bool> GetRefreshToken()
         {
-
             var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
                 Address = _serviceApiSettings.IdentityServerUrl,
@@ -54,24 +52,28 @@ namespace MultiShop.WebUI.Services.Concrete
             {
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.AccessToken,
+                    Name=OpenIdConnectParameterNames.AccessToken,
                     Value = token.AccessToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.RefreshToken,
+                    Name=OpenIdConnectParameterNames.RefreshToken,
                     Value = token.RefreshToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.ExpiresIn,
-                    Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
+                    Name=OpenIdConnectParameterNames.ExpiresIn,
+                    Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
                 }
             };
+
             var result = await _httpContextAccessor.HttpContext.AuthenticateAsync();
+
             var properties = result.Properties;
             properties.StoreTokens(authenticationToken);
+
             await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal, properties);
+
             return true;
         }
 
@@ -104,29 +106,36 @@ namespace MultiShop.WebUI.Services.Concrete
             };
 
             var userValues = await _httpClient.GetUserInfoAsync(userInfoRequest);
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme,"name","role");
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
+
             ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
             var authenticationProperties = new AuthenticationProperties();
+
             authenticationProperties.StoreTokens(new List<AuthenticationToken>()
             {
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.AccessToken,
+                    Name=OpenIdConnectParameterNames.AccessToken,
                     Value = token.AccessToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.RefreshToken,
+                    Name=OpenIdConnectParameterNames.RefreshToken,
                     Value = token.RefreshToken
                 },
                 new AuthenticationToken
                 {
-                    Name = OpenIdConnectParameterNames.ExpiresIn,
-                    Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
+                    Name=OpenIdConnectParameterNames.ExpiresIn,
+                    Value=DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
                 }
             });
+
             authenticationProperties.IsPersistent = false;
+
             await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, authenticationProperties);
+
             return true;
         }
     }

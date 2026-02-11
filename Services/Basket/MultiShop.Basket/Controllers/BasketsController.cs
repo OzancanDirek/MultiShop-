@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.Basket.Dtos;
 using MultiShop.Basket.LoginServices;
 using MultiShop.Basket.Services;
+using System.Security.Claims;
 
 namespace MultiShop.Basket.Controllers
 {
@@ -9,15 +11,15 @@ namespace MultiShop.Basket.Controllers
     [ApiController]
     public class BasketsController : ControllerBase
     {
-        private readonly IBasketService _basketService; //sepetteki ürünlerle ilgili islemler
-        private readonly ILoginService _loginService; //hangi kullanıcının sepetine istek yaptığını anlamak icin
+        private readonly IBasketService _basketService;
+        private readonly ILoginService _loginService;
 
-        public BasketsController(ILoginService loginService, IBasketService basketService)
+        public BasketsController(IBasketService basketService, ILoginService loginService)
         {
-            _loginService = loginService;
             _basketService = basketService;
+            _loginService = loginService;
         }
-        //kullanıcının sepete eklemiş oldugu ürünler icin islemler.
+
         [HttpGet]
         public async Task<IActionResult> GetMyBasketDetail()
         {
@@ -31,13 +33,14 @@ namespace MultiShop.Basket.Controllers
         {
             basketTotalDto.UserId = _loginService.GetUserId;
             await _basketService.SaveBasket(basketTotalDto);
-            return Ok("Sepetteki degisiklikler kaydedildi.");
+            return Ok("Sepetteki değişiklikler kaydedili");
         }
+
         [HttpDelete]
         public async Task<IActionResult> DeleteBasket()
         {
             await _basketService.DeleteBasket(_loginService.GetUserId);
-            return Ok("Sepetiniz silindi.");
+            return Ok("Sepet başarıyla silindi");
         }
     }
 }

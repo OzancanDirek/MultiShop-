@@ -78,21 +78,22 @@
 
     //Basket Service
     {
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "http",
-      "UpstreamPathTemplate": "/services/basket/{everything}",
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [ "BasketFullPermission" ]
-      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 7084
         }
-      ]
+      ],
+      "UpstreamPathTemplate": "/services/basket/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [ "BasketFullPermission" ]
+      }
+      
     },
 
 
@@ -114,7 +115,7 @@
         }
       ]
     },
-    
+
     //Payment Service
     {
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
