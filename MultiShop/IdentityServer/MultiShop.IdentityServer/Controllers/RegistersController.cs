@@ -29,15 +29,16 @@ namespace MultiShop.IdentityServer.Controllers
                 Name = userRegisterDto.Name,
                 Surname = userRegisterDto.Surname
             };
+
             var result = await _userManager.CreateAsync(values, userRegisterDto.Password);
+
             if (result.Succeeded)
             {
-                return Ok("Kullanici basariyla eklendi!");
+                return Ok("Kullanıcı başarıyla eklendi!");
             }
-            else
-            {
-                return Ok("Bir hata olustu, lütfen tekrar deneyiniz!");
-            }
+
+            // DÜZELTME: Hata durumunda Ok dönme! BadRequest dön ki karşı taraf anlasın.
+            return BadRequest(result.Errors);
         }
     }
 }

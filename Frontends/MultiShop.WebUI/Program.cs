@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
 using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.CatalogServices.AboutServices;
@@ -15,143 +14,95 @@ using MultiShop.WebUI.Services.CatalogServices.SliderServices;
 using MultiShop.WebUI.Services.CatalogServices.SpecialOfferServices;
 using MultiShop.WebUI.Services.CommentServices;
 using MultiShop.WebUI.Services.Concrete;
+using MultiShop.WebUI.Services.DiscountServices;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme, opt =>
-{
-    opt.LoginPath = "/Login/Index";
-    opt.LogoutPath = "/Login/Logout";
-    opt.AccessDeniedPath = "/Pages/AccessDenied";
-    opt.Cookie.HttpOnly = true;
-    opt.Cookie.SameSite = SameSiteMode.Strict;
-    opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-    opt.Cookie.Name = "MultiShopJwt";
-});
-
-builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddHttpClient<IIdentityService, IdentityService>();
-
-builder.Services.AddHttpClient();
-builder.Services.AddControllersWithViews();
-builder.Logging.AddConsole();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
-{
-    opt.LoginPath = "/Login/Index";
-    opt.ExpireTimeSpan = TimeSpan.FromDays(5);
-    opt.Cookie.Name = "MultiShopCookie";
-    opt.SlidingExpiration = true;
-});
-
+// --- Ayarlarý Okuma ---
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
-builder.Services.AddScoped<ClientCredentialTokenHandler>();
+var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+// --- Authentication (Kimlik Doðrulama) Yapýlandýrmasý ---
+// Sadece tek bir Cookie þemasý kullanýyoruz, JwtBearer ile Cookie çakýþmasýný sildik.
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+    {
+        opt.LoginPath = "/Login/Index";
+        opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+        opt.Cookie.Name = "MultiShopCookie";
+        opt.SlidingExpiration = true;
+    });
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
-builder.Services.AddHttpClient<IClientCredentialService, ClientCredentialService>();
 
-
+// --- Handler (Aracý) Tanýmlamalarý ---
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
-var values = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+// --- Servis Kayýtlarý ---
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+builder.Services.AddHttpClient<IClientCredentialService, ClientCredentialService>();
 
+// --- Microservice HttpClient Kayýtlarý (Resource Owner Token Gerektirenler) ---
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
-    opt.BaseAddress = new Uri(values.IdentityServerUrl);
+    opt.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
 {
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Basket.Path}");
+    opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Basket.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
-builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+builder.Services.AddHttpClient<IDiscountService, DiscountService>(opt =>
 {
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+    opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Discount.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
-builder.Services.AddHttpClient<IProductService, ProductService>(opt =>
+// --- Microservice HttpClient Kayýtlarý (Client Credential Token Gerektirenler) ---
+void AddCatalogClient<TInterface, TService>(string path) where TInterface : class where TService : class, TInterface
 {
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
+    builder.Services.AddHttpClient<TInterface, TService>(opt =>
+    {
+        opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{path}");
+    }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+}
 
-builder.Services.AddHttpClient<ISpecialOfferService, SpecialOfferService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IFeatureSliderService, FeatureSliderService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IFeatureService, FeatureService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IOfferDiscountService, OfferDiscountService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IBrandService, BrandService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IAboutService, AboutService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IProductImageService, ProductImageService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-builder.Services.AddHttpClient<IProductDetailService, ProductDetailService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
+AddCatalogClient<ICategoryService, CategoryService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IProductService, ProductService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<ISpecialOfferService, SpecialOfferService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IFeatureSliderService, FeatureSliderService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IFeatureService, FeatureService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IOfferDiscountService, OfferDiscountService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IBrandService, BrandService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IAboutService, AboutService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IProductImageService, ProductImageService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IProductDetailService, ProductDetailService>(serviceApiSettings.Catalog.Path);
+AddCatalogClient<IContactService, ContactService>(serviceApiSettings.Catalog.Path);
 
 builder.Services.AddHttpClient<ICommentService, CommentService>(opt =>
 {
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Comment.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
+    opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Comment.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
-builder.Services.AddHttpClient<IContactService, ContactService>(opt =>
+// --- CORS ---
+builder.Services.AddCors(options =>
 {
-    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
-})
-.AddHttpMessageHandler<ClientCredentialTokenHandler>();
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
+// --- Middleware (Ara Yazýlým) ---
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -160,13 +111,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
-
-app.UseCors("AllowAll");
-
 app.UseAuthorization();
+app.UseCors("AllowAll");
 
 app.MapControllerRoute(
     name: "areas",
