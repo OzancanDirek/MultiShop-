@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.WebUI.Services.BasketServices;
 using MultiShop.WebUI.Services.DiscountServices;
+using System.Threading.Tasks;
 
 namespace MultiShop.WebUI.Controllers
 {
@@ -22,10 +23,28 @@ namespace MultiShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public IActionResult ComfirmDiscountCoupon(string code)
+        public async Task<IActionResult> ComfirmDiscountCoupon(string code)
         {
-            var values = _discountService.GetDiscountCode(code);
-            return View();
+            const decimal taxRate = 0.10m;
+
+            var discountRate = await _discountService.GetDiscountCouponRateAsync(code);
+            var basketValues = await _basketService.GetBasket();
+
+            if (basketValues == null || basketValues.TotalPrice <= 0)
+                return RedirectToAction("Index", "ShoppingCard");
+
+            var tax = basketValues.TotalPrice * taxRate;
+            var totalPriceWithTax = basketValues.TotalPrice + tax;
+
+            var discountAmount = totalPriceWithTax * discountRate / 100m;
+            var totalNewPriceWithDiscount = totalPriceWithTax - discountAmount;
+
+            return RedirectToAction("Index", "ShoppingCard", new
+            {
+                code = code,
+                discountRate = discountRate,
+                totalNewPriceWithDiscount = totalNewPriceWithDiscount
+            });
         }
     }
 }
