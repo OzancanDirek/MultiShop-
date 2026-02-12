@@ -38,7 +38,7 @@ namespace MultiShop.Discount.Controllers
             return Ok("Kupon basariyla olusturuldu");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDiscountCoupon(int id)
         {
             await _discountService.DeleteDiscountCouponAsync(id);
@@ -59,5 +59,13 @@ namespace MultiShop.Discount.Controllers
             return Ok(values);
 
         }
+
+        [HttpGet("GetDiscountCouponRateAsync")]
+        public async Task<IActionResult> GetDiscountCouponRateAsync(string code)
+        {
+            var values = _discountService.GetDiscountCouponRateAsync(code);
+            return Ok(values);
+        }
     }
 }
+
