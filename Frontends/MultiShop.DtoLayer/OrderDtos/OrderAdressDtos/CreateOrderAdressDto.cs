@@ -1,9 +1,7 @@
-﻿namespace MultiShop.Order.Application.Features.CQRS.Commands.AdressCommands
+﻿namespace MultiShop.DtoLayer.OrderDtos.OrderAdressDtos
 {
-    public class CreateAdressCommand
+    public class CreateOrderAdressDto
     {
-
-        public int AdressId { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }

@@ -22,7 +22,7 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AdressHandlers
                 UserId = x.UserId,
                 District = x.District,
                 City = x.City,
-                Detail = x.Detail
+                Detail = x.Detail1
             }).ToList();
         }
     }

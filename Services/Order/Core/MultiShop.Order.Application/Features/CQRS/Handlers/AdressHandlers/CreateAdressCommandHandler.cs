@@ -18,9 +18,16 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.AdressHandlers
             {
                 City = createAdressCommand.City,
                 District = createAdressCommand.District,
-                Detail = createAdressCommand.Detail,
+                Detail1 = createAdressCommand.Detail1,
                 UserId = createAdressCommand.UserId,
-
+                Country = createAdressCommand.Country,
+                Description = createAdressCommand.Description,
+                Detail2 = createAdressCommand.Detail2,
+                Email = createAdressCommand.Email,
+                Name = createAdressCommand.Name,
+                Surname = createAdressCommand.Surname,
+                Phone = createAdressCommand.Phone,
+                ZipCode = createAdressCommand.ZipCode
             });
         }
     }

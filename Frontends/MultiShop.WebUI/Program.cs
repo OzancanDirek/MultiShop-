@@ -16,17 +16,16 @@ using MultiShop.WebUI.Services.CommentServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.DiscountServices;
 using MultiShop.WebUI.Services.Interfaces;
+using MultiShop.WebUI.Services.OrderServices.OrderAdressServices;
 using MultiShop.WebUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// --- Ayarlarý Okuma ---
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 
-// --- Authentication (Kimlik Doðrulama) Yapýlandýrmasý ---
-// Sadece tek bir Cookie þemasý kullanýyoruz, JwtBearer ile Cookie çakýþmasýný sildik.
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
     {
@@ -40,16 +39,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
 
-// --- Handler (Aracý) Tanýmlamalarý ---
 builder.Services.AddScoped<ClientCredentialTokenHandler>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
-// --- Servis Kayýtlarý ---
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddHttpClient<IClientCredentialService, ClientCredentialService>();
 
-// --- Microservice HttpClient Kayýtlarý (Resource Owner Token Gerektirenler) ---
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
     opt.BaseAddress = new Uri(serviceApiSettings.IdentityServerUrl);
@@ -60,12 +56,16 @@ builder.Services.AddHttpClient<IBasketService, BasketService>(opt =>
     opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Basket.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
+builder.Services.AddHttpClient<IOrderAdressService, OrderAdressService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Order.Path}");
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
 builder.Services.AddHttpClient<IDiscountService, DiscountService>(opt =>
 {
     opt.BaseAddress = new Uri($"{serviceApiSettings.OcelotUrl}/{serviceApiSettings.Discount.Path}");
 }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
-// --- Microservice HttpClient Kayýtlarý (Client Credential Token Gerektirenler) ---
 void AddCatalogClient<TInterface, TService>(string path) where TInterface : class where TService : class, TInterface
 {
     builder.Services.AddHttpClient<TInterface, TService>(opt =>
