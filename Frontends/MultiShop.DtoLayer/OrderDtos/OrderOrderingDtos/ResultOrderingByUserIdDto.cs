@@ -1,15 +1,10 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MultiShop.Order.Domain.Entities
+﻿namespace MultiShop.DtoLayer.OrderDtos.OrderOrderingDtos
 {
-    public class Ordering
+    public class ResultOrderingByUserIdDto
     {
         public int OrderingId { get; set; }
         public string UserId { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; }
-
-        [JsonIgnore]
-        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
