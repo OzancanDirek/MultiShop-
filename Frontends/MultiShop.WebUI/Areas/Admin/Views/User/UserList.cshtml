@@ -1,0 +1,189 @@
+﻿@model List<MultiShop.DtoLayer.IdentityDtos.UserDtos.ResultUserDto>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<style>
+    .user-table-wrapper {
+        padding: 2rem;
+    }
+
+    .user-table-header {
+        margin-bottom: 1.75rem;
+    }
+
+        .user-table-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 .4rem;
+        }
+
+        .user-table-header p {
+            font-size: 1rem;
+            color: #64748b;
+            margin: 0;
+        }
+
+    .user-table-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: .75rem;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+
+    .user-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 1rem;
+    }
+
+        .user-table thead {
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+            .user-table thead th {
+                padding: 1rem 1.25rem;
+                text-align: left;
+                font-size: .85rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: .05em;
+                color: #94a3b8;
+            }
+
+        .user-table tbody tr {
+            border-bottom: 1px solid #f1f5f9;
+            transition: background .12s;
+        }
+
+            .user-table tbody tr:last-child {
+                border-bottom: none;
+            }
+
+            .user-table tbody tr:hover {
+                background: #f8fafc;
+            }
+
+        .user-table tbody td {
+            padding: 1.1rem 1.25rem;
+            color: #334155;
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+
+    .td-num {
+        color: #cbd5e1;
+        font-size: .95rem;
+        width: 3rem;
+        font-weight: 600;
+    }
+
+    .td-name {
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        color: #0f172a;
+        font-size: 1rem;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff;
+        font-size: .9rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        margin-right: .75rem;
+        flex-shrink: 0;
+    }
+
+    .td-username {
+        font-family: monospace;
+        background: #f1f5f9;
+        padding: .3rem .7rem;
+        border-radius: .375rem;
+        font-size: .9rem;
+        color: #475569;
+    }
+
+    .td-email a {
+        color: #6366f1;
+        text-decoration: none;
+        font-size: .95rem;
+    }
+
+        .td-email a:hover {
+            text-decoration: underline;
+        }
+
+    .user-table-footer {
+        padding: 1rem 1.25rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        font-size: .9rem;
+        color: #94a3b8;
+    }
+</style>
+
+<div class="user-table-wrapper">
+    <div class="user-table-header">
+        <h2>Kullanıcı Listesi</h2>
+        <p>Kayıtlı kullanıcıları aşağıdan görüntüleyebilirsiniz.</p>
+    </div>
+
+    <div class="user-table-card">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ad Soyad</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>E-posta</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        var initial = (!string.IsNullOrEmpty(item.name) ? item.name.Substring(0, 1) : "") +
+                        (!string.IsNullOrEmpty(item.surname) ? item.surname.Substring(0, 1) : "");
+                        <tr>
+                            <td class="td-num">@count</td>
+                            <td>
+                                <span class="td-name">
+                                    <span class="user-avatar">@initial</span>
+                                    @item.name @item.surname
+                                </span>
+                            </td>
+                            <td><span class="td-username">@@@item.userName</span></td>
+                            <td class="td-email"><a href="mailto:@item.email">@item.email</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding:2.5rem; color:#94a3b8; font-size:1rem;">
+                            Kayıtlı kullanıcı bulunamadı.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="user-table-footer">
+            Toplam <strong>@count</strong> kullanıcı
+        </div>
+    </div>
+</div>
