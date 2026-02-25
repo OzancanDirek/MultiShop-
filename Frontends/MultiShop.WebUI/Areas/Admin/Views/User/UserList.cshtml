@@ -149,6 +149,7 @@
                     <th>Ad Soyad</th>
                     <th>Kullanıcı Adı</th>
                     <th>E-posta</th>
+                    <th>Adres Detayı</th>
                 </tr>
             </thead>
             <tbody>
@@ -169,13 +170,14 @@
                             </td>
                             <td><span class="td-username">@@@item.userName</span></td>
                             <td class="td-email"><a href="mailto:@item.email">@item.email</a></td>
+                            <td><a href="/Admin/User/UserAdressInfo/@item.id" class="btn btn-warning btn-sm">Adres Detayı</a></td>
                         </tr>
                     }
                 }
                 else
                 {
                     <tr>
-                        <td colspan="4" style="text-align:center; padding:2.5rem; color:#94a3b8; font-size:1rem;">
+                        <td colspan="5" style="text-align:center; padding:2.5rem; color:#94a3b8; font-size:1rem;">
                             Kayıtlı kullanıcı bulunamadı.
                         </td>
                     </tr>
