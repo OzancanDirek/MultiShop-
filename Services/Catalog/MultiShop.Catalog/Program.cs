@@ -12,7 +12,7 @@ using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Services.SpecialOfferServices;
-using MultiShop.Catalog.Services.StatisticServices;
+using MultiShop.Catalog.Services.StatisticServices.CatalogStatisticServices;
 using MultiShop.Catalog.Settings;
 using System.Reflection;
 

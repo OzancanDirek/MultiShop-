@@ -1,0 +1,410 @@
+﻿@{
+    ViewData["Title"] = "İstatistikler";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #f0f4ff;
+        --surface: #ffffff;
+        --surface2: #e8eeff;
+        --border: rgba(59, 130, 246, 0.12);
+        --accent1: #3b82f6;
+        --accent2: #2563eb;
+        --accent3: #ef4444;
+        --accent4: #f59e0b;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+    }
+
+    .stat-page {
+        background: var(--bg);
+        min-height: 100vh;
+        padding: 40px 32px;
+        font-family: 'Syne', sans-serif;
+    }
+
+    .stat-header {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+        margin-bottom: 48px;
+    }
+
+    .stat-header-title {
+        font-size: 13px;
+        font-family: 'DM Mono', monospace;
+        color: var(--accent2);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .stat-header h1 {
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 0;
+        line-height: 1;
+    }
+
+    .stat-header-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        margin-bottom: 8px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .stat-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px 24px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        cursor: default;
+        animation: fadeUp 0.5s ease both;
+        box-shadow: 0 1px 3px rgba(59, 130, 246, 0.08), 0 4px 16px rgba(59, 130, 246, 0.06);
+    }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--card-accent, var(--accent1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+            .stat-card:hover::before {
+                opacity: 1;
+            }
+
+    .stat-card-glow {
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: var(--card-accent, var(--accent1));
+        opacity: 0.04;
+        filter: blur(40px);
+        transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover .stat-card-glow {
+        opacity: 0.09;
+    }
+
+    .stat-card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--card-accent-bg, rgba(124,107,255,0.12));
+        margin-bottom: 20px;
+    }
+
+        .stat-card-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--card-accent, var(--accent1));
+        }
+
+    .stat-card-label {
+        font-family: 'DM Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-bottom: 10px;
+    }
+
+    .stat-card-value {
+        font-size: 38px;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+        margin-bottom: 12px;
+        letter-spacing: -1px;
+    }
+
+        .stat-card-value.small {
+            font-size: 22px;
+            letter-spacing: -0.5px;
+        }
+
+    .stat-card-sub {
+        font-family: 'DM Mono', monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+        .stat-card-sub span {
+            color: var(--card-accent, var(--accent1));
+        }
+
+    .accent-purple {
+        --card-accent: #7c6bff;
+        --card-accent-bg: rgba(124,107,255,0.10);
+    }
+
+    .accent-teal {
+        --card-accent: #00e5cc;
+        --card-accent-bg: rgba(0,229,204,0.10);
+    }
+
+    .accent-red {
+        --card-accent: #ff6b6b;
+        --card-accent-bg: rgba(255,107,107,0.10);
+    }
+
+    .accent-yellow {
+        --card-accent: #ffd93d;
+        --card-accent-bg: rgba(255,217,61,0.10);
+    }
+
+    .accent-pink {
+        --card-accent: #ff7eb3;
+        --card-accent-bg: rgba(255,126,179,0.10);
+    }
+
+    .accent-blue {
+        --card-accent: #4dabf7;
+        --card-accent-bg: rgba(77,171,247,0.10);
+    }
+
+    .accent-green {
+        --card-accent: #69db7c;
+        --card-accent-bg: rgba(105,219,124,0.10);
+    }
+
+    .accent-orange {
+        --card-accent: #ffa94d;
+        --card-accent-bg: rgba(255,169,77,0.10);
+    }
+
+    .section-label {
+        font-family: 'DM Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin: 32px 0 14px;
+        padding-left: 4px;
+    }
+
+    .stat-card:nth-child(1) {
+        animation-delay: 0.05s;
+    }
+
+    .stat-card:nth-child(2) {
+        animation-delay: 0.10s;
+    }
+
+    .stat-card:nth-child(3) {
+        animation-delay: 0.15s;
+    }
+
+    .stat-card:nth-child(4) {
+        animation-delay: 0.20s;
+    }
+
+    @@keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="stat-page">
+
+    <div class="stat-header">
+        <div>
+            <div class="stat-header-title">// Dashboard</div>
+            <h1>İstatistikler</h1>
+        </div>
+        <div class="stat-header-line"></div>
+    </div>
+
+    <div class="section-label">— Katalog</div>
+
+    <div class="stats-grid">
+        <div class="stat-card accent-purple">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Marka</div>
+            <div class="stat-card-value" data-count="@ViewBag.brandCount">@ViewBag.brandCount</div>
+            <div class="stat-card-sub"><span>●</span> Aktif markalar</div>
+        </div>
+
+        <div class="stat-card accent-teal">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" /><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Ürün</div>
+            <div class="stat-card-value" data-count="@ViewBag.getProductCount">@ViewBag.getProductCount</div>
+            <div class="stat-card-sub"><span>●</span> Listelenmiş ürünler</div>
+        </div>
+
+        <div class="stat-card accent-yellow">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Kategori</div>
+            <div class="stat-card-value" data-count="@ViewBag.getCategoryCount">@ViewBag.getCategoryCount</div>
+            <div class="stat-card-sub"><span>●</span> Ürün kategorileri</div>
+        </div>
+
+        <div class="stat-card accent-green">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>
+            </div>
+            <div class="stat-card-label">Ort. Ürün Fiyatı</div>
+            <div class="stat-card-value small">@ViewBag.getProductAvgPrice ₺</div>
+            <div class="stat-card-sub"><span>●</span> Tüm ürünlerin ortalaması</div>
+        </div>
+    </div>
+
+    <div class="section-label">— Ürünler & Kullanıcılar</div>
+
+    <div class="stats-grid">
+        <div class="stat-card accent-blue">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>
+            </div>
+            <div class="stat-card-label">En Ucuz Ürün</div>
+            <div class="stat-card-value small">@ViewBag.getMinPriceProductName</div>
+            <div class="stat-card-sub"><span>●</span> Minimum fiyatlı ürün</div>
+        </div>
+
+        <div class="stat-card accent-red">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6" /><polyline points="17 18 23 18 23 12" /></svg>
+            </div>
+            <div class="stat-card-label">En Pahalı Ürün</div>
+            <div class="stat-card-value small">@ViewBag.getMaxPriceProductName</div>
+            <div class="stat-card-sub"><span>●</span> Maksimum fiyatlı ürün</div>
+        </div>
+
+        <div class="stat-card accent-pink">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Kullanıcı</div>
+            <div class="stat-card-value" data-count="@ViewBag.getUserCount">@ViewBag.getUserCount</div>
+            <div class="stat-card-sub"><span>●</span> Kayıtlı kullanıcılar</div>
+        </div>
+
+        <div class="stat-card accent-orange">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Yorum</div>
+            <div class="stat-card-value" data-count="@ViewBag.gettotalCommentCount">@ViewBag.gettotalCommentCount</div>
+            <div class="stat-card-sub"><span>●</span> Tüm yorumlar</div>
+        </div>
+    </div>
+
+    <div class="section-label">— Yorumlar & Diğer</div>
+
+    <div class="stats-grid">
+        <div class="stat-card accent-green">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+            </div>
+            <div class="stat-card-label">Aktif Yorum</div>
+            <div class="stat-card-value" data-count="@ViewBag.getActiveCommentCount">@ViewBag.getActiveCommentCount</div>
+            <div class="stat-card-sub"><span>●</span> Onaylı yorumlar</div>
+        </div>
+
+        <div class="stat-card accent-red">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10" /><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" /></svg>
+            </div>
+            <div class="stat-card-label">Pasif Yorum</div>
+            <div class="stat-card-value" data-count="@ViewBag.getPassiveCommentCount">@ViewBag.getPassiveCommentCount</div>
+            <div class="stat-card-sub"><span>●</span> Bekleyen yorumlar</div>
+        </div>
+
+        <div class="stat-card accent-yellow">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam İndirim</div>
+            <div class="stat-card-value" data-count="@ViewBag.getDiscountCount">@ViewBag.getDiscountCount</div>
+            <div class="stat-card-sub"><span>●</span> Aktif indirim kodları</div>
+        </div>
+
+        <div class="stat-card accent-purple">
+            <div class="stat-card-glow"></div>
+            <div class="stat-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+            </div>
+            <div class="stat-card-label">Toplam Mesaj</div>
+            <div class="stat-card-value" data-count="@ViewBag.getMessageCount">@ViewBag.getMessageCount</div>
+            <div class="stat-card-sub"><span>●</span> Gelen mesajlar</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.querySelectorAll('.stat-card-value[data-count]').forEach(el => {
+        const target = parseInt(el.getAttribute('data-count')) || 0;
+        if (target === 0 || isNaN(target)) return;
+        const duration = 1200;
+        const startTime = performance.now();
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(update);
+            else el.textContent = target;
+        }
+        requestAnimationFrame(update);
+    });
+</script>

@@ -1,6 +1,6 @@
-﻿namespace MultiShop.Catalog.Services.StatisticServices
+﻿namespace MultiShop.WebUI.Services.StatisticServices.CatalogStatisticServices
 {
-    public interface IStatisticService
+    public interface ICatalogStatisticServices
     {
         Task<long> GetCategoryCount();
         Task<long> GetProductCount();
@@ -8,6 +8,5 @@
         Task<decimal> GetProductAvgPrice();
         Task<string> GetMaxPriceProductName();
         Task<string> GetMinPriceProductName();
-
     }
 }

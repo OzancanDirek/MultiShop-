@@ -3,7 +3,7 @@ using MongoDB.Driver;
 using MultiShop.Catalog.Entities;
 using MultiShop.Catalog.Settings;
 
-namespace MultiShop.Catalog.Services.StatisticServices
+namespace MultiShop.Catalog.Services.StatisticServices.CatalogStatisticServices
 {
     public class StatisticService : IStatisticService
     {
@@ -52,19 +52,24 @@ namespace MultiShop.Catalog.Services.StatisticServices
         {
             var pipeline = new BsonDocument[]
             {
-                new BsonDocument
+        new BsonDocument
+        {
+            { "$group", new BsonDocument
                 {
-                    { "$group", new BsonDocument
-                        {
-                            { "_id", BsonNull.Value },
-                            { "avgPrice", new BsonDocument { { "$avg", "$ProductPrice" } } }
-                        }
-                    }
+                    { "_id", BsonNull.Value },
+                    { "avgPrice", new BsonDocument { { "$avg", "$ProductPrice" } } }
                 }
+            }
+        }
             };
+
             var result = await _productCollection.AggregateAsync<BsonDocument>(pipeline);
-            var value = result.FirstOrDefault().GetValue("avgPrice",decimal.Zero).AsDecimal;
-            return value;
+            var document = await result.FirstOrDefaultAsync();
+
+            if (document == null || document["avgPrice"].IsBsonNull)
+                return 0;
+
+            return document["avgPrice"].ToDecimal();
         }
 
         public async Task<long> GetProductCount()
