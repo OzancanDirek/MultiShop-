@@ -22,3 +22,5 @@ packages/
 ## Others
 *.cache
 *.log
+## Google Cloud Credentials
+**/multishop-489016-9fb4efc583d4.json
