@@ -1,0 +1,38 @@
+﻿@model MultiShop.RapidApiWebUI.Models.WeatherViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hava Durumu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container mt-5">
+        @if (Model != null)
+        {
+            <div class="card shadow p-4">
+                <h2>@Model.location.name, @Model.location.country</h2>
+                <hr />
+
+                <h3>Sıcaklık: @Model.current.temp_c °C</h3>
+                <p>Durum: @Model.current.condition.text</p>
+                <p>Nem: @Model.current.humidity %</p>
+                <p>Rüzgar: @Model.current.wind_kph km/h</p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                Hava durumu bilgisi alınamadı.
+            </div>
+        }
+    </div>
+
+</body>
+</html>

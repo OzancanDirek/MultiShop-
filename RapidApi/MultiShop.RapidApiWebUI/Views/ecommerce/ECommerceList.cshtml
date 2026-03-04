@@ -1,0 +1,37 @@
+﻿@model List<eCommerceViewModel>
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th>Ürün Başlığı</th>
+                <th>Ürün Puanı</th>
+                <th>Ürün Fiyatı</th>
+                <th>Ürün Detayları</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Rating</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a href="@item.ProductUrl" target="_blank">
+                            Detayları Görüntüle
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
