@@ -1,0 +1,14 @@
+﻿@model Tuple<MultiShop.RapidApiWebUI.Models.ExchangeViewModel,
+MultiShop.RapidApiWebUI.Models.ExchangeViewModel >
+
+<div class="container mt-5">
+
+    <h3>USD → TRY Döviz Kuru</h3>
+    <h4>Dolar: @Model.Item1.data.exchange_rate</h4>
+
+    <hr />
+
+    <h3>EUR → TRY Döviz Kuru</h3>
+    <h4>Euro: @Model.Item2.data.exchange_rate</h4>
+
+</div>
