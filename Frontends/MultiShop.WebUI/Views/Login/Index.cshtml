@@ -4,53 +4,471 @@
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="utf-8">
-    <title>MultiShop Login Sayfası</title>
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- Font-->
-    <link rel="stylesheet" type="text/css" href="~/colorlib-regform-30/css/opensans-font.css">
-    <link rel="stylesheet" type="text/css" href="~/colorlib-regform-30/fonts/line-awesome/css/line-awesome.min.css">
-    <!-- Jquery -->
-    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-    <!-- Main Style Css -->
-    <link rel="stylesheet" href="~/colorlib-regform-30/css/style.css" />
-</head>
-<body class="form-v4">
-    <div class="page-content">
-        <div class="form-v4-content">
-            <div class="form-left">
-                <h2>MultiShop E-Ticaret</h2>
-                <p class="text-1">MultiShop projesi üzerinden E-Ticaret işlemlerinizi gerçekleştirebilir, kaliteli ürünleri sitemiz güvencesiyle satın alabilirsiniz. Tüm bunlar için giriş yapmış olmanız yeterli.</p>
-                <p class="text-2">Alışverişinizi gerçekleştirebilmek, sepetinize ürünleri eklemek ve ürün listelerini görebilmek için oturum açınız. Eğer hesabınız yoksa lütfen aşağıdan kayıt olunuz.  </p>
+    <title>MultiShop — Giriş</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-                <div class="form-left-last">
-                    <a href="/Register/Index/" style="height : 35px" class="account">Giriş Yap</a>
+        :root {
+            --cream: #F7F3EE;
+            --ink: #1A1714;
+            --warm-mid: #8C7B6B;
+            --accent: #C8A97A;
+            --accent-dark: #A8874E;
+            --surface: #FEFCF9;
+            --border: rgba(140, 123, 107, 0.2);
+        }
+
+        html, body {
+            height: 100%;
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--ink);
+        }
+
+        .shell {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* ── LEFT PANEL ── */
+        .panel-left {
+            position: relative;
+            background: var(--ink);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 52px 56px;
+            overflow: hidden;
+        }
+
+            .panel-left::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(200,169,122,0.18) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 80% 10%, rgba(200,169,122,0.08) 0%, transparent 60%);
+                pointer-events: none;
+            }
+
+            .panel-left::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                pointer-events: none;
+            }
+
+        .brand {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brand-tag {
+            font-size: 11px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .left-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .left-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 300;
+            color: #fff;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 28px;
+        }
+
+            .left-headline em {
+                font-style: italic;
+                color: var(--accent);
+            }
+
+        .left-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.8;
+            max-width: 340px;
+        }
+
+        .divider-line {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            margin: 32px 0;
+            opacity: 0.6;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 300;
+        }
+
+        .feature-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+            opacity: 0.7;
+        }
+
+        .left-footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-prompt {
+            font-size: 13px;
+            color: rgba(255,255,255,0.35);
+            font-weight: 300;
+        }
+
+        .register-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(200,169,122,0.3);
+            padding-bottom: 1px;
+            transition: border-color 0.2s;
+        }
+
+            .register-link:hover {
+                border-color: var(--accent);
+            }
+
+        /* ── RIGHT PANEL ── */
+        .panel-right {
+            background: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-eyebrow {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 13.5px;
+            color: var(--warm-mid);
+            font-weight: 300;
+            margin-bottom: 44px;
+            line-height: 1.6;
+        }
+
+        .field-group {
+            margin-bottom: 24px;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--warm-mid);
+            margin-bottom: 10px;
+        }
+
+        .field-wrap {
+            position: relative;
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--warm-mid);
+            opacity: 0.5;
+            pointer-events: none;
+            width: 16px;
+            height: 16px;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 14px 16px 14px 44px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--ink);
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+            -webkit-appearance: none;
+        }
+
+            .field-input::placeholder {
+                color: rgba(140,123,107,0.45);
+            }
+
+            .field-input:focus {
+                border-color: var(--accent);
+                background: #fff;
+                box-shadow: 0 0 0 3px rgba(200,169,122,0.12);
+            }
+
+                .field-input:focus + .field-focus-bar {
+                    transform: scaleX(1);
+                }
+
+        .forgot-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        .forgot-link {
+            font-size: 12px;
+            color: var(--warm-mid);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.2s;
+        }
+
+            .forgot-link:hover {
+                color: var(--accent-dark);
+            }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--ink);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s, transform 0.15s;
+        }
+
+            .submit-btn::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(135deg, transparent 40%, rgba(200,169,122,0.12) 100%);
+                pointer-events: none;
+            }
+
+            .submit-btn:hover {
+                background: #2c2825;
+                transform: translateY(-1px);
+            }
+
+            .submit-btn:active {
+                transform: translateY(0);
+            }
+
+        .or-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 28px 0 0;
+        }
+
+        .or-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .or-text {
+            font-size: 11px;
+            color: var(--warm-mid);
+            opacity: 0.6;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .register-bottom {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--warm-mid);
+            font-weight: 300;
+        }
+
+            .register-bottom a {
+                color: var(--ink);
+                font-weight: 500;
+                text-decoration: none;
+                border-bottom: 1px solid rgba(26,23,20,0.25);
+                padding-bottom: 1px;
+                transition: border-color 0.2s;
+            }
+
+                .register-bottom a:hover {
+                    border-color: var(--ink);
+                }
+
+       
+
+    </style>
+</head>
+<body>
+    <div class="shell">
+
+        <!-- LEFT -->
+        <div class="panel-left">
+            <div class="brand">
+                <div class="brand-name">MultiShop</div>
+                <div class="brand-tag">E-Ticaret Platformu</div>
+            </div>
+
+            <div class="left-body">
+                <h1 class="left-headline">
+                    Alışverişin<br>
+                    <em>zarif</em> yolu.
+                </h1>
+                <p class="left-desc">
+                    Kaliteli ürünler, güvenli ödeme ve hızlı teslimat — hepsi tek bir platformda. Hesabınıza giriş yaparak alışverişe başlayın.
+                </p>
+                <div class="divider-line"></div>
+                <div class="features">
+                    <div class="feature-item"><span class="feature-dot"></span>Güvenli alışveriş altyapısı</div>
+                    <div class="feature-item"><span class="feature-dot"></span>Kişiselleştirilmiş ürün önerileri</div>
+                    <div class="feature-item"><span class="feature-dot"></span>Anlık sipariş takibi</div>
                 </div>
             </div>
-            <form class="form-detail" method="post">
-                <h2>MultiShop Giriş Formu</h2>
 
-                <div class="form-row">
-                    <label for="your_username">Kullanıcı Adınız</label>
-                    <input type="text"  id="your_username" asp-for="Username" class="input-text" required>
-                </div>
-
-                <div class="form-row">
-                    <label for="your_password">Şifreniz</label>
-                    <input type="password" id="your_password" asp-for="Password" class="input-text" required>
-                </div>
-
-                <div class="form-row-last">
-                    <button class="register" style="height : 40px">Giriş Yap</button>
-                </div>
-            </form>
+            <div class="left-footer">
+                <p class="register-prompt">
+                    Hesabınız yok mu? <a href="/Register/Index/" class="register-link">Üye olun</a>
+                </p>
+            </div>
         </div>
+
+        <!-- RIGHT -->
+        <div class="panel-right">
+            <div class="form-container">
+                <p class="form-eyebrow">Hoş Geldiniz</p>
+                <h2 class="form-title">Hesabınıza<br>giriş yapın</h2>
+                <p class="form-subtitle">Devam etmek için kullanıcı bilgilerinizi girin.</p>
+
+                <form method="post" novalidate>
+                    <div class="field-group">
+                        <label class="field-label" for="your_username">Kullanıcı Adı</label>
+                        <div class="field-wrap">
+                            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            <input type="text"
+                                   id="your_username"
+                                   asp-for="Username"
+                                   class="field-input"
+                                   placeholder="kullanici_adi"
+                                   autocomplete="username"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label" for="your_password">Şifre</label>
+                        <div class="field-wrap">
+                            <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                            <input type="password"
+                                   id="your_password"
+                                   asp-for="Password"
+                                   class="field-input"
+                                   placeholder="••••••••"
+                                   autocomplete="current-password"
+                                   required>
+                        </div>
+                        <div class="forgot-row">
+                            <a href="#" class="forgot-link">Şifremi unuttum</a>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Giriş Yap</button>
+                </form>
+
+                <div class="or-divider">
+                    <span class="or-line"></span>
+                    <span class="or-text">veya</span>
+                    <span class="or-line"></span>
+                </div>
+
+                <p class="register-bottom">
+                    Hesabınız yok mu? <a href="/Register/Index/">Kayıt olun</a>
+                </p>
+            </div>
+        </div>
+
     </div>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </body>
 </html>
