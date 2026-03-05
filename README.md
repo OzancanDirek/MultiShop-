@@ -67,11 +67,6 @@ Proje toplamda 8 mikroservisten oluşmaktadır:
 <img width="1863" height="981" alt="Ekran görüntüsü 2026-03-05 195421" src="https://github.com/user-attachments/assets/b3507ed4-cd89-4194-90cf-6865d5637fea" />
 <img width="1870" height="895" alt="Ekran görüntüsü 2026-03-05 202159" src="https://github.com/user-attachments/assets/94ab5cc6-6cc1-4643-9123-7d53befc1240" />
 
-<img width="1862" height="997" alt="Ekran görüntüsü 2026-03-05 195101" src="https://github.com/user-attachments/assets/6b66aaad-2412-457b-bc38-505e2d1bba6a" />
-<img width="1853" height="837" alt="Ekran görüntüsü 2026-03-05 195040" src="https://github.com/user-attachments/assets/5fb51e47-25f7-442f-b43f-56c627949624" />
-<img width="1857" height="902" alt="Ekran görüntüsü 2026-03-05 194948" src="https://github.com/user-attachments/assets/19f9b81e-cf79-458c-a7d2-28bebd5bf0a5" />
-<img width="1865" height="996" alt="Ekran görüntüsü 2026-03-05 193336" src="https://github.com/user-attachments/assets/0a76052c-b869-4357-a434-d54204ea8b93" />
-<img width="1854" height="911" alt="Ekran görüntüsü 2026-03-05 195152" src="https://github.com/user-attachments/assets/819bfa06-02f2-47b7-bcf3-3abd19011e3a" />
 
 
 ## ✉️ İletişim
